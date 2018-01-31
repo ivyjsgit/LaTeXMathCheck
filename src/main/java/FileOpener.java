@@ -3,8 +3,8 @@ import java.io.*;
 public class FileOpener {
     public static String openFile(String filePath){
 
-            String line = null;
-            String text = null;
+            String line = "";
+            String text = "";
             try {
                 // FileReader reads text files in the default encoding.
                 FileReader fileReader =
@@ -15,7 +15,7 @@ public class FileOpener {
                         new BufferedReader(fileReader);
 
                 while((line = bufferedReader.readLine()) != null) {
-                    System.out.println(line);
+                  //  System.out.println(line);
                     text+=line;
                 }
 
