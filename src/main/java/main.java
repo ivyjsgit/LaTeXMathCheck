@@ -5,7 +5,7 @@ public class main {
         String equation="$1+1=2$";
         ArrayList<String> foundEquations = EquationParser.getEquations(equation);
         for(String equationItem:foundEquations) {
-            EquationChecker.checkEquation(equatio);
+            System.out.println(EquationChecker.checkEquation(equationItem));
         }
     }
 }

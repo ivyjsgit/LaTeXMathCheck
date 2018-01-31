@@ -13,6 +13,6 @@ public class EquationParser {
         return StringUtils.substringBefore(equation,"=");
     }
     public static BigDecimal afterEquals(String equation){
-        return BigDecimal.valueOf(Double.parseDouble(StringUtils.substringAfter(equation,"=")));
+        return new BigDecimal(StringUtils.substringAfter(equation,"="));
     }
 }
