@@ -1,4 +1,3 @@
-import com.sun.deploy.util.ArrayUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -13,6 +12,6 @@ public class EquationParser {
         return StringUtils.substringBefore(equation,"=");
     }
     public static BigDecimal afterEquals(String equation){
-        return BigDecimal.valueOf(Double.parseDouble(StringUtils.substringAfter(equation,"=")));
+        return new BigDecimal(StringUtils.substringAfter(equation,"="));
     }
 }
