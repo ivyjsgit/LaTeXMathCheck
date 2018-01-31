@@ -1,6 +1,12 @@
-import java.io.*;
+import com.sun.tools.javac.util.List;
 
-public class FileOpener {
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
+public class FileManager {
     public static String openFile(String filePath){
 
             String line = "";
@@ -16,8 +22,11 @@ public class FileOpener {
 
                 while((line = bufferedReader.readLine()) != null) {
                   //  System.out.println(line);
-                    text+=line;
+                    text+=line+"\n";
                 }
+
+                //Remove last newline char
+                text=text.substring(0,text.length() - 1);
 
                 // Always close files.
                 bufferedReader.close();
@@ -26,4 +35,15 @@ public class FileOpener {
         }
         return text;
     }
+    public static void fileSaver(String documentContents, String filepath){
+        try {
+            ArrayList<String> fileLines = new ArrayList<>();
+            fileLines.add(documentContents);
+
+            Files.write(Paths.get(filepath), fileLines, Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
