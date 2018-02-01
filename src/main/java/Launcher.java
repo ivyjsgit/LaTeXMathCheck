@@ -22,7 +22,7 @@ public     Scene scene;
             root = FXMLLoader.load(getClass().getResource("MathSolver.fxml"));
             scene = new Scene(root, 1080, 1920);
 
-            primaryStage.setTitle("FXML Welcome");
+            primaryStage.setTitle("MathSolver");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
