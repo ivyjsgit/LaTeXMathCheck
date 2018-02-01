@@ -6,16 +6,33 @@ import java.util.Arrays;
 
 public class EquationParser {
     public static ArrayList<String> getEquations(String docAsString) {
-        return new ArrayList(Arrays.asList(StringUtils.substringsBetween(docAsString, "$", "$")));
+        ArrayList<String> output =  new ArrayList<>();
+        String[] stringAsArray = docAsString.split("\\n");
+        for(String line:stringAsArray){
+            output.add(line);
+        }
+        return output;
     }
 
     public static String beforeEquals(String equation) {
-        return StringUtils.substringBefore(equation, "=");
+        String beforeEquals = StringUtils.remove(StringUtils.substringBefore(equation, "="), "$");
+
+        return beforeEquals;
     }
 
     public static BigDecimal afterEquals(String equation) {
+        String afterEquals = StringUtils.remove(StringUtils.substringAfter(equation, "="), "$");
 
-        return new BigDecimal(StringUtils.substringAfter(equation, "="));
+
+        return new BigDecimal(afterEquals);
+
+
+    }
+
+    public static boolean isFunction(String string) {
+        boolean isFunction = StringUtils.startsWith(string, "$") && (StringUtils.endsWith(string, "$") || StringUtils.endsWith(string, "$\n"));
+        return isFunction;
+
 
     }
 }
