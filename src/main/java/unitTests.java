@@ -2,6 +2,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -23,11 +25,22 @@ public class unitTests {
                 "is\n" +
                 "a\n" +
                 "test";
-        String pathName = "/Users/ivy/Desktop/TexTesting/text.txt";
-        FileManager.fileSaver(fileContents, pathName);
-        File fileToOpen=new File("/Users/ivy/Desktop/TexTesting/testMe.tex");
-        String text = FileManager.stringFromFile(fileToOpen);
-        Assert.assertEquals(fileContents, text);
+
+        try {
+            File fileToOpen=new File("/Users/ivy/Desktop/TexTesting/txt.tex");
+            fileToOpen.createNewFile();
+            PrintStream fileOutput = new PrintStream(fileToOpen);
+
+            fileOutput = new PrintStream(fileToOpen);
+            fileOutput.println(fileContents);
+
+
+            String text = FileManager.stringFromFile(fileToOpen);
+            Assert.assertEquals(fileContents, text);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Test
@@ -43,13 +56,9 @@ public class unitTests {
         correctAnswers.add("$3^2=9$");
         correctAnswers.add("This is a test sentence");
         correctAnswers.add("$3^2=9$");
-        System.out.println("Before math" +returnedEquations.size());
 
        returnedEquations= EquationChecker.correctAllAnswers(returnedEquations);
 
-        System.out.println("Returned answers size " +returnedEquations.size());
-
-        System.out.println("Testing assert" + correctAnswers.toString() + " " + returnedEquations.toString());
         for (int i = 0; i < returnedEquations.size(); i++) {
             Assert.assertTrue(returnedEquations.get(i).equals(correctAnswers.get(i)));
         }
