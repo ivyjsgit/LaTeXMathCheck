@@ -26,4 +26,5 @@ public class unitTests {
         String text = FileOpener.openFile("/Users/ivy/Desktop/TexTesting/testMe.tex");
         Assert.assertEquals("$3+3=6$",text);
     }
+
 }
