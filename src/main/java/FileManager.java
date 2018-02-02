@@ -1,5 +1,3 @@
-import com.sun.tools.javac.util.List;
-
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;

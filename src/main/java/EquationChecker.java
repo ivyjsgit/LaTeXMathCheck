@@ -1,20 +1,19 @@
 import com.udojava.evalex.Expression;
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
+import org.apache.commons.lang3.StringUtils;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class EquationChecker {
-    public static boolean isEquationTrue(String providedEquation) {
-        if (EquationParser.isFunction(providedEquation)) {
-            String equation = EquationParser.beforeEquals(providedEquation);
-
-            boolean isCorrect = (getCalculatedAnswer(equation).equals(getSuppliedAnswer(providedEquation)));
-            return isCorrect;
-        }
-        return false;
-    }
+//    public static boolean isEquationTrue(String providedEquation) {
+//        if (EquationParser.isFunction(providedEquation)) {
+//            String equation = EquationParser.beforeEquals(providedEquation);
+//
+//            boolean isCorrect = (getCalculatedAnswer(equation).equals(getSuppliedAnswer(providedEquation)));
+//            return isCorrect;
+//        }
+//        return false;
+//    }
 
     public static BigDecimal getCalculatedAnswer(String equation) {
 
@@ -36,27 +35,29 @@ public class EquationChecker {
     public static String getCorrectEquation(String providedEquation) {
 
         if (EquationParser.isFunction(providedEquation)) {
-            String equation = EquationParser.beforeEquals(providedEquation);
-            BigDecimal calculatedAnswer = getCalculatedAnswer(equation);
+            String equationBeforeEquals = EquationParser.beforeEquals(providedEquation);
+            BigDecimal calculatedAnswer = getCalculatedAnswer(equationBeforeEquals);
 
             BigDecimal suppliedAnswer = getSuppliedAnswer(providedEquation);
 
             if (!calculatedAnswer.equals(suppliedAnswer)) {
-                providedEquation = "$" + equation + "=" + calculatedAnswer + "$";
+                providedEquation = "$" + equationBeforeEquals + "=" + calculatedAnswer + "$";
             }
-            return providedEquation;
         }
         return providedEquation;
 
     }
 
     public static ArrayList<String> correctAllAnswers(ArrayList<String> equationArrayList) {
-        for (int i = 0; i < equationArrayList.size(); i++) {
-
-            String correctAnswer = EquationChecker.getCorrectEquation(equationArrayList.get(i));
+        for (int currentEquation = 0; currentEquation < equationArrayList.size(); currentEquation++) {
+            boolean wasOriginallyEquation =EquationParser.isFunction(equationArrayList.get(currentEquation));
+            String correctAnswer = EquationChecker.getCorrectEquation(equationArrayList.get(currentEquation));
+           correctAnswer= StringUtils.remove(correctAnswer,"$");
+            if(wasOriginallyEquation){
+                correctAnswer="$"+correctAnswer+"$";
+            }
             if (!correctAnswer.equals(""))
-
-                equationArrayList.set(i, correctAnswer);
+                equationArrayList.set(currentEquation, correctAnswer);
         }
 
         return equationArrayList;

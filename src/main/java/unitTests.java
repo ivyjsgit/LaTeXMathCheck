@@ -3,7 +3,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,14 +34,10 @@ public class unitTests {
             Path relPath = Paths.get("src/main/resources/text.tex");
             File fileToOpen=relPath.toFile();
             fileToOpen.createNewFile();
-            PrintStream fileOutput = new PrintStream(fileToOpen);
+           FileManager.fileSaver(fileContents,relPath.toAbsolutePath().toString());
 
-            fileOutput = new PrintStream(fileToOpen);
-            fileOutput.println(fileContents);
-
-
-            String text = FileManager.stringFromFile(fileToOpen);
-            Assert.assertEquals(fileContents, text);
+            String returnedFileContents = FileManager.stringFromFile(fileToOpen);
+            Assert.assertEquals(fileContents, returnedFileContents);
         } catch (IOException e) {
             e.printStackTrace();
         }

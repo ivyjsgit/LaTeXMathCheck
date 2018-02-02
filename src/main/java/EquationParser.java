@@ -2,7 +2,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class EquationParser {
     public static ArrayList<String> getEquations(String docAsString) {

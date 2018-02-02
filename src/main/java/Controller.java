@@ -43,23 +43,15 @@ public class Controller implements Initializable {
 
     @FXML
     public void saveAsPushed(ActionEvent event) {
-        fileChooser.setTitle("Open Resource File");
+        fileChooser.setTitle("Save as");
         String stringOutput="";
         for(String line:equations){
 
-          stringOutput+="$"+line+"$\n";
+          stringOutput+=line+"\n";
         }
         stringOutput= StringUtils.substringBeforeLast(stringOutput,"\n");
         File selectedFile = fileChooser.showSaveDialog(new Stage());
-        try {
-            selectedFile.createNewFile();
-            PrintStream fileOutput = new PrintStream(selectedFile);
-
-            fileOutput = new PrintStream(selectedFile);
-            fileOutput.println(stringOutput);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FileManager.fileSaver(stringOutput,selectedFile.getAbsolutePath().toString());
 
     }
 }
