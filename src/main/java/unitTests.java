@@ -5,12 +5,17 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.math.BigDecimal;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class unitTests {
     @Test
     public void testOpenFile() {
-        File fileToOpen=new File("/Users/ivy/Desktop/TexTesting/testMe.tex");
+        Path relPath = Paths.get("src/main/resources/testMe.tex");
+        System.out.println(relPath.toAbsolutePath());
+        File fileToOpen=relPath.toAbsolutePath().toFile();
+
         String text = FileManager.stringFromFile(fileToOpen);
         Assert.assertEquals("$3+3=6$\n" +
                 "$3+3=6$\n" +
@@ -27,7 +32,8 @@ public class unitTests {
                 "test";
 
         try {
-            File fileToOpen=new File("/Users/ivy/Desktop/TexTesting/txt.tex");
+            Path relPath = Paths.get("src/main/resources/text.tex");
+            File fileToOpen=relPath.toFile();
             fileToOpen.createNewFile();
             PrintStream fileOutput = new PrintStream(fileToOpen);
 
@@ -45,7 +51,9 @@ public class unitTests {
 
     @Test
     public void replaceAnswers() {
-        File equationsFile = new File("/Users/ivy/Desktop/TexTesting/testMe.tex");
+        Path relPath = Paths.get("src/main/resources/testMe.tex");
+        File fileToOpen=new File(relPath.toAbsolutePath().toString());
+        File equationsFile = relPath.toFile();
         String output = FileManager.stringFromFile(equationsFile);
         ArrayList<String> returnedEquations = EquationParser.getEquations(output);
 
