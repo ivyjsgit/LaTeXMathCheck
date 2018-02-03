@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.FileChooser;
@@ -6,6 +7,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -53,5 +55,10 @@ public class Controller implements Initializable {
         File selectedFile = fileChooser.showSaveDialog(new Stage());
         FileManager.fileSaver(stringOutput,selectedFile.getAbsolutePath().toString());
 
+    }
+    @FXML
+    public void quit(ActionEvent event){
+        Platform.exit();
+        System.exit(0);
     }
 }
