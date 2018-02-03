@@ -6,6 +6,10 @@ import java.util.ArrayList;
 public class unitTests {
     @Test
     public void testEquations(){
+<<<<<<< HEAD
+        System.out.println("Running tests");
+=======
+>>>>>>> master
         String trueEquations = "$1+1=2$ $2+2=4$ $1.5+1.5=3$";
         String falseEquations = "$1+1=3$ $2+2=100$";
 
@@ -19,4 +23,14 @@ public class unitTests {
             Assert.assertFalse(EquationChecker.checkEquation(equation));
         }
     }
+<<<<<<< HEAD
+
+    @Test
+    public void testFiles(){
+        String text = FileOpener.openFile("/Users/ivy/Desktop/TexTesting/testMe.tex");
+        Assert.assertEquals("$3+3=6$",text);
+    }
+
+=======
+>>>>>>> master
 }
