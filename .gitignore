@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 /.gradle/
 /bin/
 
 \.idea/
 !/out/
 
+=======
+/bin/
+>>>>>>> master

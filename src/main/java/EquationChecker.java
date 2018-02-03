@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class EquationChecker {
+<<<<<<< HEAD
 //    public static boolean isEquationTrue(String providedEquation) {
 //        if (EquationParser.isFunction(providedEquation)) {
 //            String equation = EquationParser.beforeEquals(providedEquation);
@@ -21,6 +22,21 @@ public class EquationChecker {
         BigDecimal calculatedResult = equationAsExpression.eval();
         return calculatedResult;
 
+=======
+	/**
+	 * Check if provided equation matches computer answer.
+	 * @param providedEquation
+	 * @return
+	 */
+    public static boolean checkEquation(String providedEquation){
+        BigDecimal providedResult = EquationParser.afterEquals(providedEquation);
+        String equation = EquationParser.beforeEquals(providedEquation);
+
+        Expression equationAsExpression= new Expression(equation);
+        BigDecimal calculatedResult = equationAsExpression.eval();
+
+        return calculatedResult.equals(providedResult);
+>>>>>>> master
     }
 
     public static BigDecimal getSuppliedAnswer(String equation) {
