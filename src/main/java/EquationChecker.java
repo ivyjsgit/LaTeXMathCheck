@@ -5,18 +5,20 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class EquationChecker {
-//    public static boolean isEquationTrue(String providedEquation) {
-//        if (EquationParser.isFunction(providedEquation)) {
-//            String equation = EquationParser.beforeEquals(providedEquation);
-//
-//            boolean isCorrect = (getCalculatedAnswer(equation).equals(getSuppliedAnswer(providedEquation)));
-//            return isCorrect;
-//        }
-//        return false;
-//    }
+    public static boolean isEquationTrue(String providedEquation) {
+        if (EquationParser.isFunction(providedEquation)) {
+            String equation = EquationParser.beforeEquals(providedEquation);
 
+            boolean isCorrect = (getCalculatedAnswer(equation).equals(getSuppliedAnswer(providedEquation)));
+            return isCorrect;
+        }
+        return false;
+    }
+
+    //Evalex https://github.com/uklimaschewski/EvalEx
+    //uklimaschewski github
     public static BigDecimal getCalculatedAnswer(String equation) {
-
+        equation=EquationParser.beforeEquals(equation);
         Expression equationAsExpression = new Expression(equation);
         BigDecimal calculatedResult = equationAsExpression.eval();
         return calculatedResult;
@@ -48,7 +50,8 @@ public class EquationChecker {
 
     }
 
-    public static ArrayList<String> correctAllAnswers(ArrayList<String> equationArrayList) {
+    public static ArrayList<String> correctAllAnswers(ArrayList<String> originalArrayList) {
+        ArrayList<String> equationArrayList = (ArrayList<String>)originalArrayList.clone();
         for (int currentEquation = 0; currentEquation < equationArrayList.size(); currentEquation++) {
             boolean wasOriginallyEquation =EquationParser.isFunction(equationArrayList.get(currentEquation));
             String correctAnswer = EquationChecker.getCorrectEquation(equationArrayList.get(currentEquation));
