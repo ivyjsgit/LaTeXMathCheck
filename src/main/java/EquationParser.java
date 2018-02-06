@@ -6,9 +6,9 @@ import java.util.ArrayList;
 public class EquationParser {
 
     public static ArrayList<String> getEquations(String docAsString) {
-        ArrayList<String> output =  new ArrayList<>();
+        ArrayList<String> output = new ArrayList<>();
         String[] stringAsArray = docAsString.split("\\n");
-        for(String line:stringAsArray){
+        for (String line : stringAsArray) {
             output.add(line);
         }
         return output;
