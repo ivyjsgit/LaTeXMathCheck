@@ -1,10 +1,6 @@
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 
 import java.lang.reflect.Method;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class JavaFXUtils {
@@ -12,46 +8,28 @@ public class JavaFXUtils {
     //Code by Vova Perebykivskyi on StackOverflow
     public static int getRowNumber(GridPane gridPane) {
 
-        Integer rows=0;
+        Integer rows = 0;
         try {
             Method method = gridPane.getClass().getDeclaredMethod("getNumberOfRows");
             method.setAccessible(true);
-             rows = (Integer) method.invoke(gridPane);
+            rows = (Integer) method.invoke(gridPane);
         } catch (Exception e) {
 
         }
-    return (int)rows;
+        return (int) rows;
     }
-    public static void addMathRow(GridPane parentGridPane, String equation, ArrayList<String> equationsArray, ArrayList<String> correctEquationsArray){
-        if(!EquationChecker.isEquationTrue(equation)&&EquationParser.isFunction(equation)) {
 
-            String displayText = EquationParser.beforeEquals(equation) + "=" + EquationParser.afterEquals(equation);
-            BigDecimal returnedAnswer = EquationChecker.getCalculatedAnswer(EquationParser.beforeEquals(equation));
-            System.out.println(returnedAnswer.toString());
+    public static void addMathRow(GridPane parentGridPane, String equation, ArrayList<String> equationsArray, ArrayList<String> correctEquationsArray) {
+        if (!EquationChecker.isEquationTrue(equation) && EquationParser.isFunction(equation)) {
 
-            int numberOfRows = JavaFXUtils.getRowNumber(parentGridPane);
 
-            Text expressionText = new Text(displayText);
-            expressionText.setText(displayText);
-            Text foundResult = new Text(EquationChecker.getSuppliedAnswer(equation).toString());
-            Text calculatedResult = new Text(EquationChecker.getCalculatedAnswer(equation).toString());
-            GridPane yesNoBox = new GridPane();
-            Button yesButton = new Button("Yes");
-            yesButton.setAlignment(Pos.CENTER);
-            YesButtonAction yesButtonAction = new YesButtonAction(equation, equationsArray,correctEquationsArray);
-            yesButton.setOnAction(evt -> yesButtonAction.handle(evt));
+            EquationRow equationRow = new EquationRow(parentGridPane, equation, equationsArray, correctEquationsArray);
 
-            Button noButton = new Button("No");
-            noButton.setAlignment(Pos.CENTER);
-            yesNoBox.setAlignment(Pos.CENTER);
 
-            yesNoBox.add(yesButton, 0, 0);
-            yesNoBox.add(noButton, 1, 0);
-
-            parentGridPane.add(expressionText, 0, numberOfRows + 1);
-            parentGridPane.add(foundResult, 1, numberOfRows + 1);
-            parentGridPane.add(calculatedResult, 2, numberOfRows + 1);
-            parentGridPane.add(yesNoBox, 3, numberOfRows + 1);
+            parentGridPane.add(equationRow.getExpressionText(), 0, equationRow.getRowIndex());
+            parentGridPane.add(equationRow.getFoundResult(), 1, equationRow.getRowIndex());
+            parentGridPane.add(equationRow.getCalculatedResult(), 2, equationRow.getRowIndex());
+            parentGridPane.add(equationRow.getYesNoBox(), 3, equationRow.getRowIndex());
 
         }
     }

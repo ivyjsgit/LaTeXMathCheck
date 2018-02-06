@@ -13,7 +13,7 @@ public class unitTests {
     public void testOpenFile() {
         Path relPath = Paths.get("src/main/resources/testMe.tex");
         System.out.println(relPath.toAbsolutePath());
-        File fileToOpen=relPath.toAbsolutePath().toFile();
+        File fileToOpen = relPath.toAbsolutePath().toFile();
 
         String text = FileManager.stringFromFile(fileToOpen);
         Assert.assertEquals("$3+3=6$\n" +
@@ -32,9 +32,9 @@ public class unitTests {
 
         try {
             Path relPath = Paths.get("src/main/resources/text.tex");
-            File fileToOpen=relPath.toFile();
+            File fileToOpen = relPath.toFile();
             fileToOpen.createNewFile();
-           FileManager.fileSaver(fileContents,relPath.toAbsolutePath().toString());
+            FileManager.fileSaver(fileContents, relPath.toAbsolutePath().toString());
 
             String returnedFileContents = FileManager.stringFromFile(fileToOpen);
             Assert.assertEquals(fileContents, returnedFileContents);
@@ -47,7 +47,7 @@ public class unitTests {
     @Test
     public void replaceAnswers() {
         Path relPath = Paths.get("src/main/resources/testMe.tex");
-        File fileToOpen=new File(relPath.toAbsolutePath().toString());
+        File fileToOpen = new File(relPath.toAbsolutePath().toString());
         File equationsFile = relPath.toFile();
         String output = FileManager.stringFromFile(equationsFile);
         ArrayList<String> returnedEquations = EquationParser.getEquations(output);
@@ -60,29 +60,31 @@ public class unitTests {
         correctAnswers.add("This is a test sentence");
         correctAnswers.add("$3^2=9$");
 
-       returnedEquations= EquationChecker.correctAllAnswers(returnedEquations);
+        returnedEquations = EquationChecker.correctAllAnswers(returnedEquations);
 
         for (int i = 0; i < returnedEquations.size(); i++) {
             Assert.assertTrue(returnedEquations.get(i).equals(correctAnswers.get(i)));
         }
 
     }
+
     @Test
-    public void isFunction(){
+    public void isFunction() {
         Assert.assertTrue(EquationParser.isFunction("$1+1=2$"));
         Assert.assertTrue(EquationParser.isFunction("$1+2=3$"));
         Assert.assertFalse(EquationParser.isFunction("This is not a function"));
 
     }
+
     @Test
-    public void afterEquals(){
+    public void afterEquals() {
         ArrayList<String> correctAnswers = new ArrayList<>();
         correctAnswers.add("$3+3=6$");
         correctAnswers.add("$3+3=6$");
         correctAnswers.add("$3^2=9$");
-        Assert.assertEquals(BigDecimal.valueOf(6),EquationParser.afterEquals(correctAnswers.get(0)));
-        Assert.assertEquals(BigDecimal.valueOf(6),EquationParser.afterEquals(correctAnswers.get(1)));
-        Assert.assertEquals(BigDecimal.valueOf(9),EquationParser.afterEquals(correctAnswers.get(2)));
+        Assert.assertEquals(BigDecimal.valueOf(6), EquationParser.afterEquals(correctAnswers.get(0)));
+        Assert.assertEquals(BigDecimal.valueOf(6), EquationParser.afterEquals(correctAnswers.get(1)));
+        Assert.assertEquals(BigDecimal.valueOf(9), EquationParser.afterEquals(correctAnswers.get(2)));
 
     }
 
