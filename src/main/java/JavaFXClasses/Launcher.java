@@ -7,10 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 
 public class Launcher extends Application {
-    public Scene scene;
+    private Scene scene;
 
     public static void main(String[] args) {
         launch(args);
@@ -18,12 +17,10 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Parent root = null;
+        Parent root;
         try {
-            FXMLLoader loadMe = new FXMLLoader();
             root = FXMLLoader.load(getClass().getResource("/MathSolver.fxml"));
             scene = new Scene(root, 1080, 1920);
-
             primaryStage.setTitle("MathSolver");
             primaryStage.setScene(scene);
             primaryStage.show();

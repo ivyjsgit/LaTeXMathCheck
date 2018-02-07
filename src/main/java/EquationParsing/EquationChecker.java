@@ -7,14 +7,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class EquationChecker {
-    public static boolean isEquationTrue(String providedEquation) {
+    public static boolean isEquationFalse(String providedEquation) {
         if (EquationParser.isFunction(providedEquation)) {
             String equation = EquationParser.beforeEquals(providedEquation);
 
             boolean isCorrect = (getCalculatedAnswer(equation).equals(getSuppliedAnswer(providedEquation)));
-            return isCorrect;
+            return !isCorrect;
         }
-        return false;
+        return true;
     }
 
     //Evalex https://github.com/uklimaschewski/EvalEx
@@ -36,7 +36,7 @@ public class EquationChecker {
         return null;
     }
 
-    public static String getCorrectEquation(String providedEquation) {
+    private static String getCorrectEquation(String providedEquation) {
 
         if (EquationParser.isFunction(providedEquation)) {
             String equationBeforeEquals = EquationParser.beforeEquals(providedEquation);
@@ -56,18 +56,22 @@ public class EquationChecker {
     public static ArrayList<String> correctAllAnswers(ArrayList<String> originalArrayList) {
         ArrayList<String> equationArrayList = (ArrayList<String>) originalArrayList.clone();
         for (int currentEquation = 0; currentEquation < equationArrayList.size(); currentEquation++) {
-            boolean wasOriginallyEquation = EquationParser.isFunction(equationArrayList.get(currentEquation));
-            String correctAnswer = EquationChecker.getCorrectEquation(equationArrayList.get(currentEquation));
-            correctAnswer = StringUtils.remove(correctAnswer, "$");
-            if (wasOriginallyEquation) {
-                correctAnswer = "$" + correctAnswer + "$";
-            }
+            String correctAnswer=correctOneAnswer(equationArrayList.get(currentEquation));
             if (!correctAnswer.equals(""))
                 equationArrayList.set(currentEquation, correctAnswer);
         }
 
         return equationArrayList;
 
+    }
+    private static String correctOneAnswer(String currentEquation){
+        boolean wasOriginallyEquation = EquationParser.isFunction(currentEquation);
+        String correctAnswer = EquationChecker.getCorrectEquation(currentEquation);
+        correctAnswer = StringUtils.remove(correctAnswer, "$");
+        if (wasOriginallyEquation) {
+            correctAnswer = "$" + correctAnswer + "$";
+        }
+        return correctAnswer;
     }
 
 }

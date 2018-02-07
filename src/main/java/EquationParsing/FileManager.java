@@ -24,21 +24,21 @@ public class FileManager {
     }
 
     public static String stringFromFile(File file) {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         try {
 
             Scanner sc = new Scanner(file);
 
             while (sc.hasNextLine()) {
 
-                output += sc.nextLine();
-                if (sc.hasNextLine()) output += "\n";
+                output.append(sc.nextLine());
+                if (sc.hasNextLine()) output.append("\n");
             }
             sc.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return output;
+        return output.toString();
     }
 
 }

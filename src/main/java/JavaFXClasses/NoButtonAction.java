@@ -4,9 +4,9 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.layout.GridPane;
 
-public class NoButtonAction implements EventHandler {
-    GridPane parentGrid;
-    int rowIndex;
+class NoButtonAction implements EventHandler {
+    private GridPane parentGrid;
+    private int rowIndex;
     private String equation;
 
     public NoButtonAction(GridPane parentGrid, int rowIndex, String equation) {

@@ -9,8 +9,9 @@ import javafx.scene.text.Text;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class EquationRow {
+class EquationRow {
     private int rowIndex;
     private Text expressionText;
     private Text foundResult;
@@ -19,7 +20,7 @@ public class EquationRow {
 
 
     public EquationRow(GridPane parentGridPane, String equation, ArrayList<String> equationsArray, ArrayList<String> correctEquationsArray) {
-        if (!EquationChecker.isEquationTrue(equation) && EquationParser.isFunction(equation)) {
+        if (EquationChecker.isEquationFalse(equation) && EquationParser.isFunction(equation)) {
 
             String displayText = EquationParser.beforeEquals(equation) + "=" + EquationParser.afterEquals(equation);
             BigDecimal returnedAnswer = EquationChecker.getCalculatedAnswer(EquationParser.beforeEquals(equation));
@@ -31,17 +32,17 @@ public class EquationRow {
 
             expressionText = new Text(displayText);
             expressionText.setText(displayText);
-            setFoundResult(new Text(EquationChecker.getSuppliedAnswer(equation).toString()));
+            setFoundResult(new Text(Objects.requireNonNull(EquationChecker.getSuppliedAnswer(equation)).toString()));
             setCalculatedResult(new Text(EquationChecker.getCalculatedAnswer(equation).toString()));
             setYesNoBox(new GridPane());
             Button yesButton = new Button("Yes");
             yesButton.setAlignment(Pos.CENTER);
             YesButtonAction yesButtonAction = new YesButtonAction(equation, equationsArray, correctEquationsArray, parentGridPane, rowIndex);
-            yesButton.setOnAction(evt -> yesButtonAction.handle(evt));
+            yesButton.setOnAction(yesButtonAction::handle);
 
             Button noButton = new Button("No");
             NoButtonAction noButtonAction = new NoButtonAction(parentGridPane, rowIndex, displayText);
-            noButton.setOnAction(evt -> noButtonAction.handle(evt));
+            noButton.setOnAction(noButtonAction::handle);
 
             noButton.setAlignment(Pos.CENTER);
             getYesNoBox().setAlignment(Pos.CENTER);
@@ -56,7 +57,7 @@ public class EquationRow {
         return foundResult;
     }
 
-    public void setFoundResult(Text foundResult) {
+    private void setFoundResult(Text foundResult) {
         this.foundResult = foundResult;
     }
 
@@ -64,7 +65,7 @@ public class EquationRow {
         return calculatedResult;
     }
 
-    public void setCalculatedResult(Text calculatedResult) {
+    private void setCalculatedResult(Text calculatedResult) {
         this.calculatedResult = calculatedResult;
     }
 
@@ -72,7 +73,7 @@ public class EquationRow {
         return yesNoBox;
     }
 
-    public void setYesNoBox(GridPane yesNoBox) {
+    private void setYesNoBox(GridPane yesNoBox) {
         this.yesNoBox = yesNoBox;
     }
 

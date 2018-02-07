@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 
-public class YesButtonAction implements EventHandler {
+class YesButtonAction implements EventHandler {
     private String equation;
     private ArrayList<String> equationsArray;
     private ArrayList<String> correctEquationsArray;

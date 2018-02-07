@@ -2,7 +2,6 @@ package JavaFXClasses;
 
 import EquationParsing.EquationChecker;
 import EquationParsing.EquationParser;
-import JavaFXClasses.EquationRow;
 import com.apple.eawt.Application;
 import javafx.scene.layout.GridPane;
 
@@ -10,7 +9,7 @@ import java.awt.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-public class JavaFXUtils {
+class JavaFXUtils {
     //Taken from https://stackoverflow.com/a/39807235
     //Code by Vova Perebykivskyi on StackOverflow
     public static int getRowNumber(GridPane gridPane) {
@@ -23,15 +22,13 @@ public class JavaFXUtils {
         } catch (Exception e) {
 
         }
-        return (int) rows;
+        return rows;
     }
 
     public static void addMathRow(GridPane parentGridPane, String equation, ArrayList<String> equationsArray, ArrayList<String> correctEquationsArray) {
-        if (!EquationChecker.isEquationTrue(equation) && EquationParser.isFunction(equation)) {
-
+        if (EquationChecker.isEquationFalse(equation) && EquationParser.isFunction(equation)) {
 
             EquationRow equationRow = new EquationRow(parentGridPane, equation, equationsArray, correctEquationsArray);
-
 
             parentGridPane.add(equationRow.getExpressionText(), 0, equationRow.getRowIndex());
             parentGridPane.add(equationRow.getFoundResult(), 1, equationRow.getRowIndex());
