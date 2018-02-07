@@ -6,23 +6,11 @@ import com.apple.eawt.Application;
 import javafx.scene.layout.GridPane;
 
 import java.awt.*;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 class JavaFXUtils {
-    //Taken from https://stackoverflow.com/a/39807235
-    //Code by Vova Perebykivskyi on StackOverflow
     public static int getRowNumber(GridPane gridPane) {
-
-        Integer rows = 0;
-        try {
-            Method method = gridPane.getClass().getDeclaredMethod("getNumberOfRows");
-            method.setAccessible(true);
-            rows = (Integer) method.invoke(gridPane);
-        } catch (Exception e) {
-
-        }
-        return rows;
+        return gridPane.getRowCount();
     }
 
     public static void addMathRow(GridPane parentGridPane, String equation, ArrayList<String> equationsArray, ArrayList<String> correctEquationsArray) {
