@@ -52,7 +52,6 @@ public class unitTests {
     @Test
     public void replaceAnswers() {
         Path relPath = Paths.get("src/main/resources/testMe.tex");
-        File fileToOpen = new File(relPath.toAbsolutePath().toString());
         File equationsFile = relPath.toFile();
         String output = FileManager.stringFromFile(equationsFile);
         ArrayList<String> returnedEquations = EquationParser.getEquations(output);

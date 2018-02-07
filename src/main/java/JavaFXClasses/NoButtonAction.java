@@ -4,15 +4,17 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.layout.GridPane;
 
-public class NoButtonAction implements EventHandler {
-    GridPane parentGrid;
-    int rowIndex;
+class NoButtonAction implements EventHandler {
+    private GridPane parentGrid;
+    private int rowIndex;
+<<<<<<< HEAD
+=======
     private String equation;
+>>>>>>> Testing
 
-    public NoButtonAction(GridPane parentGrid, int rowIndex, String equation) {
+    public NoButtonAction(GridPane parentGrid, int rowIndex) {
         this.parentGrid = parentGrid;
         this.rowIndex = rowIndex;
-        this.equation = equation;
     }
 
     @Override
