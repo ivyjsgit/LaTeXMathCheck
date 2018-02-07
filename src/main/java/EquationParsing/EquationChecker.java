@@ -7,14 +7,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class EquationChecker {
-    public static boolean isEquationTrue(String providedEquation) {
+    public static boolean isEquationFalse(String providedEquation) {
         if (EquationParser.isFunction(providedEquation)) {
             String equation = EquationParser.beforeEquals(providedEquation);
 
             boolean isCorrect = (getCalculatedAnswer(equation).equals(getSuppliedAnswer(providedEquation)));
-            return isCorrect;
+            return !isCorrect;
         }
-        return false;
+        return true;
     }
 
     //Evalex https://github.com/uklimaschewski/EvalEx
@@ -36,7 +36,7 @@ public class EquationChecker {
         return null;
     }
 
-    public static String getCorrectEquation(String providedEquation) {
+    private static String getCorrectEquation(String providedEquation) {
 
         if (EquationParser.isFunction(providedEquation)) {
             String equationBeforeEquals = EquationParser.beforeEquals(providedEquation);

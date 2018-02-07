@@ -25,7 +25,6 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     FileChooser fileChooser = new FileChooser();
-    File selectedFile = new File("");
     ArrayList<String> correctedEquations = new ArrayList<>();
     ArrayList<String> parsedEquations = new ArrayList<>();
     @FXML
@@ -85,14 +84,14 @@ public class Controller implements Initializable {
     @FXML
     public void saveAsPushed(ActionEvent event) {
         fileChooser.setTitle("Save as");
-        String stringOutput = "";
+        StringBuilder stringOutput = new StringBuilder();
         for (String line : parsedEquations) {
 
-            stringOutput += line + "\n";
+            stringOutput.append(line).append("\n");
         }
-        stringOutput = StringUtils.substringBeforeLast(stringOutput, "\n");
+        stringOutput = new StringBuilder(StringUtils.substringBeforeLast(stringOutput.toString(), "\n"));
         File selectedFile = fileChooser.showSaveDialog(new Stage());
-        FileManager.fileSaver(stringOutput, selectedFile.getAbsolutePath().toString());
+        FileManager.fileSaver(stringOutput.toString(), selectedFile.getAbsolutePath());
 
     }
 

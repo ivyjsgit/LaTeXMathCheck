@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 
-public class YesButtonAction implements EventHandler {
+class YesButtonAction implements EventHandler {
     private String equation;
     private ArrayList<String> equationsArray;
     private ArrayList<String> correctEquationsArray;
@@ -32,9 +32,5 @@ public class YesButtonAction implements EventHandler {
         System.out.println(this.equationsArray);
         parentGrid.getChildren().removeIf(node -> (GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) != 0) && GridPane.getRowIndex(node) == rowIndex);
 
-    }
-
-    public ArrayList<String> getEquationsArray() {
-        return equationsArray;
     }
 }
