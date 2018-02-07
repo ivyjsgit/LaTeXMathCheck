@@ -20,14 +20,14 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem id="openFile" mnemonicParsing="false" onAction="#openFilePicker" text="Open…" />
+            <MenuItem id="openFile" fx:id="openMenuItem" mnemonicParsing="false" onAction="#openFilePicker" text="Open…" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Close" />
             <MenuItem mnemonicParsing="false" text="Save" />
             <MenuItem fx:id="saveAsButton" mnemonicParsing="false" onAction="#saveAsPushed" text="Save As…" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
+            <MenuItem fx:id="quitButton" mnemonicParsing="false" onAction="#quit" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">

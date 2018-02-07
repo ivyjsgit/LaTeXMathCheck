@@ -2,6 +2,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class EquationParser {
 
@@ -16,7 +18,7 @@ public class EquationParser {
 
     public static String beforeEquals(String equation) {
         String beforeEquals = StringUtils.remove(StringUtils.substringBefore(equation, "="), "$");
-
+        beforeEquals=beforeEquals.replace("\\pi", "PI");
         return beforeEquals;
     }
 
@@ -31,8 +33,28 @@ public class EquationParser {
 
     public static boolean isFunction(String string) {
         boolean isFunction = StringUtils.startsWith(string, "$") && (StringUtils.endsWith(string, "$") || StringUtils.endsWith(string, "$\n"));
+        //        System.out.println(containsExtraSymbols(string));
+//        isFunction=isFunction&&containsExtraSymbols(string);
         return isFunction;
-
-
     }
+//    public static boolean containsExtraSymbols(String equation){
+//
+//        List<String> illegalSymbols = Arrays.asList(("\\alpha \\theta o \\tau \n" +
+//                "\\beta \\vartheta \\pi \\upsilon \n" +
+//                "\\gamma \\gamma \\varpi \\phi \n" +
+//                "\\delta \\kappa \\rho \\varphi \n" +
+//                "\\epsilon \\lambda \\varrho \\chi \n" +
+//                "\\varepsilon \\mu \\sigma \\psi \n" +
+//                "\\zeta \\nu \\varsigma \\omega \n" +
+//                "\\eta \\xi \n" +
+//                "\\Gamma \\Lambda \\Sigma \\Psi \n" +
+//                "\\Delta \\Xi \\Upsilon \\Omega \n" +
+//                "\\Theta").split("\\s+"));
+//        for(String symbol: illegalSymbols){
+//            if(equation.contains(symbol)){
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 }

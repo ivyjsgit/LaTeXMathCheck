@@ -87,6 +87,9 @@ public class unitTests {
         Assert.assertEquals(BigDecimal.valueOf(9), EquationParser.afterEquals(correctAnswers.get(2)));
 
     }
-
+    @Test
+    public void containsGreekSymbols(){
+        Assert.assertFalse(EquationParser.isFunction("$\\Theta $"));
+    }
 
 }

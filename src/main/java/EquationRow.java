@@ -36,7 +36,7 @@ public class EquationRow {
             setYesNoBox(new GridPane());
             Button yesButton = new Button("Yes");
             yesButton.setAlignment(Pos.CENTER);
-            YesButtonAction yesButtonAction = new YesButtonAction(equation, equationsArray, correctEquationsArray);
+            YesButtonAction yesButtonAction = new YesButtonAction(equation, equationsArray, correctEquationsArray, parentGridPane, rowIndex);
             yesButton.setOnAction(evt -> yesButtonAction.handle(evt));
 
             Button noButton = new Button("No");

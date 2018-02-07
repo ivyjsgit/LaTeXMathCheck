@@ -44,6 +44,7 @@ public class EquationChecker {
 
             if (!calculatedAnswer.equals(suppliedAnswer)) {
                 providedEquation = "$" + equationBeforeEquals + "=" + calculatedAnswer + "$";
+                providedEquation=providedEquation.replace("PI","\\pi");
             }
         }
         return providedEquation;
