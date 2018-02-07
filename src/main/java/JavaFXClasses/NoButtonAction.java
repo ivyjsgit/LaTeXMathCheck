@@ -7,10 +7,6 @@ import javafx.scene.layout.GridPane;
 class NoButtonAction implements EventHandler {
     private GridPane parentGrid;
     private int rowIndex;
-<<<<<<< HEAD
-=======
-    private String equation;
->>>>>>> Testing
 
     public NoButtonAction(GridPane parentGrid, int rowIndex) {
         this.parentGrid = parentGrid;
