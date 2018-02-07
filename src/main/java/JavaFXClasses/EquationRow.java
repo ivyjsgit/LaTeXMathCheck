@@ -32,7 +32,11 @@ class EquationRow {
 
             expressionText = new Text(displayText);
             expressionText.setText(displayText);
-            setFoundResult(new Text(Objects.requireNonNull(EquationChecker.getSuppliedAnswer(equation)).toString()));
+            try {
+                setFoundResult(new Text(Objects.requireNonNull(EquationChecker.getSuppliedAnswer(equation)).toString()));
+            } catch (EquationChecker.nonBigDecimalError nonBigDecimalError) {
+                nonBigDecimalError.printStackTrace();
+            }
             setCalculatedResult(new Text(EquationChecker.getCalculatedAnswer(equation).toString()));
             setYesNoBox(new GridPane());
             Button yesButton = new Button("Yes");

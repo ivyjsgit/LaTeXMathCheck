@@ -11,7 +11,12 @@ public class EquationChecker {
         if (EquationParser.isFunction(providedEquation)) {
             String equation = EquationParser.beforeEquals(providedEquation);
 
-            boolean isCorrect = (getCalculatedAnswer(equation).equals(getSuppliedAnswer(providedEquation)));
+            boolean isCorrect = false;
+            try {
+                isCorrect = (getCalculatedAnswer(equation).equals(getSuppliedAnswer(providedEquation)));
+            } catch (EquationChecker.nonBigDecimalError nonBigDecimalError) {
+                nonBigDecimalError.printStackTrace();
+            }
             return !isCorrect;
         }
         return true;
@@ -27,13 +32,13 @@ public class EquationChecker {
 
     }
 
-    public static BigDecimal getSuppliedAnswer(String equation) {
+    public static BigDecimal getSuppliedAnswer(String equation) throws nonBigDecimalError {
 
         if (EquationParser.isFunction(equation)) {
             BigDecimal providedResult = EquationParser.afterEquals(equation);
             return providedResult;
         }
-        return null;
+        throw new nonBigDecimalError();
     }
 
     private static String getCorrectEquation(String providedEquation) {
@@ -42,7 +47,12 @@ public class EquationChecker {
             String equationBeforeEquals = EquationParser.beforeEquals(providedEquation);
             BigDecimal calculatedAnswer = getCalculatedAnswer(equationBeforeEquals);
 
-            BigDecimal suppliedAnswer = getSuppliedAnswer(providedEquation);
+            BigDecimal suppliedAnswer = null;
+            try {
+                suppliedAnswer = getSuppliedAnswer(providedEquation);
+            } catch (EquationChecker.nonBigDecimalError nonBigDecimalError) {
+                nonBigDecimalError.printStackTrace();
+            }
 
             if (!calculatedAnswer.equals(suppliedAnswer)) {
                 providedEquation = "$" + equationBeforeEquals + "=" + calculatedAnswer + "$";
@@ -56,7 +66,7 @@ public class EquationChecker {
     public static ArrayList<String> correctAllAnswers(ArrayList<String> originalArrayList) {
         ArrayList<String> equationArrayList = (ArrayList<String>) originalArrayList.clone();
         for (int currentEquation = 0; currentEquation < equationArrayList.size(); currentEquation++) {
-            String correctAnswer=correctOneAnswer(equationArrayList.get(currentEquation));
+            String correctAnswer = correctOneAnswer(equationArrayList.get(currentEquation));
             if (!correctAnswer.equals(""))
                 equationArrayList.set(currentEquation, correctAnswer);
         }
@@ -64,7 +74,8 @@ public class EquationChecker {
         return equationArrayList;
 
     }
-    private static String correctOneAnswer(String currentEquation){
+
+    private static String correctOneAnswer(String currentEquation) {
         boolean wasOriginallyEquation = EquationParser.isFunction(currentEquation);
         String correctAnswer = EquationChecker.getCorrectEquation(currentEquation);
         correctAnswer = StringUtils.remove(correctAnswer, "$");
@@ -74,4 +85,7 @@ public class EquationChecker {
         return correctAnswer;
     }
 
+    public static class nonBigDecimalError extends Throwable {
+
+    }
 }
