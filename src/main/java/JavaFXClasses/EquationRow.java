@@ -38,19 +38,12 @@ class EquationRow {
             Button yesButton = new Button("Yes");
             yesButton.setAlignment(Pos.CENTER);
             YesButtonAction yesButtonAction = new YesButtonAction(equation, equationsArray, correctEquationsArray, parentGridPane, rowIndex);
-<<<<<<< HEAD
+
             yesButton.setOnAction(yesButtonAction);
 
             Button noButton = new Button("No");
             NoButtonAction noButtonAction = new NoButtonAction(parentGridPane, rowIndex);
             noButton.setOnAction(noButtonAction);
-=======
-            yesButton.setOnAction(yesButtonAction::handle);
-
-            Button noButton = new Button("No");
-            NoButtonAction noButtonAction = new NoButtonAction(parentGridPane, rowIndex, displayText);
-            noButton.setOnAction(noButtonAction::handle);
->>>>>>> Testing
 
             noButton.setAlignment(Pos.CENTER);
             getYesNoBox().setAlignment(Pos.CENTER);
