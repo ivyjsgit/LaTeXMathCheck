@@ -22,23 +22,10 @@
           <items>
             <MenuItem id="openFile" fx:id="openMenuItem" mnemonicParsing="false" onAction="#openFilePicker" text="Open…" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
             <MenuItem fx:id="saveAsButton" mnemonicParsing="false" onAction="#saveAsPushed" text="Save As…" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem fx:id="quitButton" mnemonicParsing="false" onAction="#quit" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MathSolver" />
           </items>
         </Menu>
       </menus>

@@ -56,18 +56,22 @@ public class EquationChecker {
     public static ArrayList<String> correctAllAnswers(ArrayList<String> originalArrayList) {
         ArrayList<String> equationArrayList = (ArrayList<String>) originalArrayList.clone();
         for (int currentEquation = 0; currentEquation < equationArrayList.size(); currentEquation++) {
-            boolean wasOriginallyEquation = EquationParser.isFunction(equationArrayList.get(currentEquation));
-            String correctAnswer = EquationChecker.getCorrectEquation(equationArrayList.get(currentEquation));
-            correctAnswer = StringUtils.remove(correctAnswer, "$");
-            if (wasOriginallyEquation) {
-                correctAnswer = "$" + correctAnswer + "$";
-            }
+            String correctAnswer=correctOneAnswer(equationArrayList.get(currentEquation));
             if (!correctAnswer.equals(""))
                 equationArrayList.set(currentEquation, correctAnswer);
         }
 
         return equationArrayList;
 
+    }
+    private static String correctOneAnswer(String currentEquation){
+        boolean wasOriginallyEquation = EquationParser.isFunction(currentEquation);
+        String correctAnswer = EquationChecker.getCorrectEquation(currentEquation);
+        correctAnswer = StringUtils.remove(correctAnswer, "$");
+        if (wasOriginallyEquation) {
+            correctAnswer = "$" + correctAnswer + "$";
+        }
+        return correctAnswer;
     }
 
 }

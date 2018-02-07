@@ -23,7 +23,6 @@ public class Launcher extends Application {
             FXMLLoader loadMe = new FXMLLoader();
             root = FXMLLoader.load(getClass().getResource("/MathSolver.fxml"));
             scene = new Scene(root, 1080, 1920);
-
             primaryStage.setTitle("MathSolver");
             primaryStage.setScene(scene);
             primaryStage.show();
