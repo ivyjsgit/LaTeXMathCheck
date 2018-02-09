@@ -22,9 +22,8 @@ class EquationRow {
     public EquationRow(GridPane parentGridPane, String equation, ArrayList<String> equationsArray, ArrayList<String> correctEquationsArray) {
         if (EquationChecker.isEquationFalse(equation) && EquationParser.isFunction(equation)) {
 
-            String displayText = EquationParser.beforeEquals(equation) + "=" + EquationParser.afterEquals(equation);
+            String displayText = EquationParser.beforeEquals(equation) + "=" + EquationParser.afterEquals(equation)+ " (Line number " + (equationsArray.indexOf(equation)+1) + ")";
             BigDecimal returnedAnswer = EquationChecker.getCalculatedAnswer(EquationParser.beforeEquals(equation));
-            System.out.println(returnedAnswer.toString());
 
             int numberOfRows = JavaFXUtils.getRowNumber(parentGridPane);
 

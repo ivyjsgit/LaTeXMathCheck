@@ -9,8 +9,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Launcher extends Application {
-    private Scene scene;
-
+    private static Scene scene;
+    private static Stage returnableStage;
     public static void main(String[] args) {
         launch(args);
     }
@@ -18,6 +18,7 @@ public class Launcher extends Application {
     @Override
     public void start(Stage primaryStage) {
         Parent root;
+        returnableStage=primaryStage;
         try {
             root = FXMLLoader.load(getClass().getResource("/MathSolver.fxml"));
             scene = new Scene(root, 1080, 1920);
@@ -28,5 +29,8 @@ public class Launcher extends Application {
             e.printStackTrace();
         }
 
+    }
+    public static Stage getPrimaryStage(){
+        return returnableStage;
     }
 }

@@ -25,11 +25,7 @@ class YesButtonAction implements EventHandler {
 
     @Override
     public void handle(Event event) {
-        System.out.println(equationsArray);
-        System.out.println(equation);
-        System.out.println(equationsArray.indexOf(equation));
         this.equationsArray.set(equationsArray.indexOf(equation), correctEquationsArray.get(equationsArray.indexOf(equation)));
-        System.out.println(this.equationsArray);
         parentGrid.getChildren().removeIf(node -> (GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) != 0) && GridPane.getRowIndex(node) == rowIndex);
 
     }

@@ -3,6 +3,7 @@ package JavaFXClasses;
 import EquationParsing.EquationChecker;
 import EquationParsing.EquationParser;
 import EquationParsing.FileManager;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,6 +36,7 @@ public class Controller implements Initializable {
     MenuItem saveAsButton;
     @FXML
     MenuItem quitButton;
+    Object cleanGrid;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,6 +59,7 @@ public class Controller implements Initializable {
             quitButton.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
 
         }
+        cleanGrid = parentGridPane.getProperties();
 
     }
 
@@ -72,12 +75,13 @@ public class Controller implements Initializable {
 
         parsedEquations = EquationParser.getEquations(output);
         correctedEquations = EquationChecker.correctAllAnswers(parsedEquations);
-
-        System.out.println(parsedEquations.toString());
+        parentGridPane.getChildren().clear();
+        JavaFXUtils.addLabelRow(parentGridPane);
         for (String equation : parsedEquations) {
             System.out.println(equation);
             JavaFXUtils.addMathRow(parentGridPane, equation, parsedEquations, correctedEquations);
         }
+        Launcher.getPrimaryStage().setTitle("Mathcheck-" + selectedFile.getName());
     }
 
 
