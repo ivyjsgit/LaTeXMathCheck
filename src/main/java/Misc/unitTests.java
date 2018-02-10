@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class unitTests {
     @Test
-    public void testOpenFile() {
+    public void tetstOpenFile() {
         Path relPath = Paths.get("src/main/resources/testMe.tex");
         System.out.println(relPath.toAbsolutePath());
         File fileToOpen = relPath.toAbsolutePath().toFile();
