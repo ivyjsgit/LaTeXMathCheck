@@ -3,6 +3,7 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'application'
+
 sourceCompatibility = 1.9
 
 repositories {
@@ -17,12 +18,3 @@ dependencies {
 }
 
 mainClassName='JavaFXClasses.Launcher'
-jar {
-    manifest {
-        attributes "Main-Class": "JavaFXClasses.Launcher"
-    }
-
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-}
